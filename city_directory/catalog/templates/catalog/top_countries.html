@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Top 10 Countries by Number of Cities</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .countries-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .country-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+
+        .country-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .country-item:last-child {
+            border-bottom: none;
+        }
+
+        .country-rank {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 60px;
+        }
+
+        .country-name {
+            flex-grow: 1;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-left: 20px;
+        }
+
+        .city-count {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .total-info {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 1.1em;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background: white;
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Top 10 Countries</h1>
+            <p>Ranked by number of cities in database</p>
+        </div>
+
+        <div class="countries-list">
+            {% for country in top_countries %}
+            <div class="country-item">
+                <div class="country-rank">
+                    {% if forloop.counter == 1 %}
+                    #{{ forloop.counter }}
+                    {% elif forloop.counter == 2 %}
+                    #{{ forloop.counter }}
+                    {% elif forloop.counter == 3 %}
+                    #{{ forloop.counter }}
+                    {% else %}
+                    #{{ forloop.counter }}
+                    {% endif %}
+                </div>
+                <div class="country-name">
+                    {{ country.name }}
+                </div>
+                <div class="city-count">
+                    {{ country.city_count }} cities
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="total-info">
+            <p> Total in database: {{ total_countries }} countries and {{ total_cities }} cities</p>
+        </div>
+
+        <div class="back-link">
+            <a href="/city/"> Search cities by country</a>
+        </div>
+    </div>
+</body>
+
+</html>
