@@ -9,8 +9,8 @@ def city_list_by_country(request):
 
     if not country_name:
         return HttpResponse(
-            "<h1>Please specify a country</h1>"
-            "<p>Usage: /city/?country=CountryName</p>"
+            "<h1>Country?</h1>"
+            "<p>Use: /city/?country=CountryName</p>"
             "<p>Example: /city/?country=Afghanistan</p>"
         )
 
@@ -43,3 +43,11 @@ def top_countries(request):
             "total_cities": total_cities,
         },
     )
+
+
+def home_page(request):
+    context = {
+        'total_countries': Country.objects.count(),
+        'total_cities': City.objects.count(),
+    }
+    return render(request, 'catalog/home.html', context)

@@ -17,9 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from catalog import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('catalog.urls')),
+    path("admin/", admin.site.urls),
+    path("", views.home_page, name="home"),
+    path("city/", views.city_list_by_country, name="city_list"),
+    path("country/top/", views.top_countries, name="top_countries"),
 ]
-

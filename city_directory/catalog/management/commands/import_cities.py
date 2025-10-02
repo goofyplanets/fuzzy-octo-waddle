@@ -4,7 +4,7 @@ from catalog.models import City, Country
 
 
 class Command(BaseCommand):
-    help = "Import cities from CSV. Expected headers: name and either country_id or country_code"
+    help = "Import cities from CSV."
 
     def add_arguments(self, parser):
         parser.add_argument("D:\django\csv_files\cities.csv", type=str)
@@ -12,7 +12,7 @@ class Command(BaseCommand):
             "--country-by",
             choices=["id", "code"],
             default="id",
-            help="how to match city rows to countries: by external id (default) or by code",
+            help="how to match city rows to countries: id (default) or code",
         )
 
     def handle(self, *args, **options):

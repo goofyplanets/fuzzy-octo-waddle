@@ -4,7 +4,7 @@ from catalog.models import Country
 
 
 class Command(BaseCommand):
-    help = "Import countries from CSV. Expected headers: name and either country_id or country_code"
+    help = "Import countries from CSV."
 
     def add_arguments(self, parser):
         parser.add_argument("D:\django\csv_files\cities.csv", type=str)
@@ -22,20 +22,18 @@ class Command(BaseCommand):
 
                 if not external:
                     self.stdout.write(
-                        self.style.WARNING(f"Пропуск строки без country_id: {row}")
+                        self.style.WARNING(f"Line without country_id: {row}")
                     )
                     continue
                 try:
                     external = int(external)
                 except ValueError:
-                    self.stdout.write(
-                        self.style.ERROR(f"Неверный country_id {external}")
-                    )
+                    self.stdout.write(self.style.ERROR(f"Wrong country_id {external}"))
                     continue
 
                 obj, created = Country.objects.update_or_create(
                     external_id=external,
                     defaults={"name": name or "", "code": code or ""},
                 )
-                action = "Создано" if created else "Обновлено"
-                self.stdout.write(f"{action} Страна: {obj}")
+                action = "Created" if created else "Updated"
+                self.stdout.write(f"{action} Country: {obj}")
